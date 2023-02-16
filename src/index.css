@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+:root {
+  --primary-light: #8abdff;
+  --primary: #6d5dfc;
+  --primary-dark: #5b0eeb;
+
+  --white: #ffffff;
+  --greyLight-1: #e4ebf5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+
+  --transition-time-1: 0.4s;
+}
+
+body {
+  font-family: Poppins;
+}
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: auto;
+  width: 20em;
+  height: 20em;
+}
