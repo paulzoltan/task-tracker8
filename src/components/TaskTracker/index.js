@@ -1,1 +1,1 @@
-export { default } from './TaskTracker'
+export { default, queryClient } from './TaskTracker'

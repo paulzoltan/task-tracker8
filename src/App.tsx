@@ -1,8 +1,6 @@
 import React from 'react'
-import TaskTracker from './components/TaskTracker'
-import { QueryClient, QueryClientProvider } from 'react-query'
-
-const queryClient = new QueryClient()
+import TaskTracker, { queryClient } from './components/TaskTracker'
+import { QueryClientProvider } from 'react-query'
 
 function App() {
   return (
