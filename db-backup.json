@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "description": "Repair the bike",
+      "time": "Today",
+      "isSetReminder": true,
+      "id": 0
+    },
+    {
+      "description": "Prepare lunch",
+      "time": "Tomorow",
+      "isSetReminder": false,
+      "id": 1
+    },
+    {
+      "description": "Land a job",
+      "time": "Next week",
+      "isSetReminder": true,
+      "id": 2
+    }
+  ]
+}
