@@ -3,51 +3,48 @@ import { useReducer } from 'react'
 import { QueryClient, useQuery, useMutation } from 'react-query'
 import axios from 'axios'
 import Button from '../../UI/Button'
-import IconButton from '../../UI/IconButton'
-import Switch from '../../UI/Switch'
-import { FaTrash, FaBell } from 'react-icons/fa'
+import TaskList from '../TaskList'
 
 export const queryClient = new QueryClient()
 
-const aTask = {
-  description: 'Prepare lunch',
-  time: 'Tomorow',
-  isSetReminder: false,
-}
-
-interface TaskType {
+export interface Task {
   description: string
   time: string
   isSetReminder: boolean
   id?: number | string
 }
 
-type TaskContext = {
-  tasks: TaskType[]
-  add: (task: TaskType) => void
-  update: (task: TaskType) => void
-  remove: (id: TaskType['id']) => void
+export type TaskContext = {
+  tasks: Task[]
+  add: (task: Task) => void
+  update: (task: Task) => void
+  remove: (id: Task['id']) => void
+}
+const aTask = {
+  description: 'Prepare lunch',
+  time: 'Tomorow',
+  isSetReminder: false,
 }
 
 type ActionType =
   | {
       type: 'SYNC'
-      tasks: TaskType[]
+      tasks: Task[]
     }
   | {
       type: 'ADD'
-      task: TaskType
+      task: Task
     }
   | {
       type: 'REMOVE'
-      id: TaskType['id']
+      id: Task['id']
     }
   | {
       type: 'UPDATE'
-      task: TaskType
+      task: Task
     }
 
-const reducer = (tasks: TaskType[], action: ActionType) => {
+const reducer = (tasks: Task[], action: ActionType) => {
   switch (action.type) {
     case 'SYNC':
       return action.tasks
@@ -78,12 +75,12 @@ const TaskTracker = () => {
     },
   })
   const { mutate: post } = useMutation({
-    mutationFn: (task: TaskType) =>
+    mutationFn: (task: Task) =>
       axios.post('http://localhost:3003/tasks', task).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
   const { mutate: put } = useMutation({
-    mutationFn: (task: TaskType) =>
+    mutationFn: (task: Task) =>
       axios
         .put(`http://localhost:3003/tasks/${task.id}`, task)
         .then((res) => res.data),
@@ -91,26 +88,26 @@ const TaskTracker = () => {
   })
 
   const { mutate: del } = useMutation({
-    mutationFn: (id: TaskType['id']) =>
+    mutationFn: (id: Task['id']) =>
       axios.delete(`http://localhost:3003/tasks/${id}`).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
 
   const taskContext = {
     tasks,
-    add: (task: TaskType) => {
+    add: (task: Task) => {
       setTimeout(() => {
         post(task)
         dispatch({ type: 'ADD', task })
       })
     },
-    update: (task: TaskType) => {
+    update: (task: Task) => {
       setTimeout(() => {
         put(task)
         dispatch({ type: 'UPDATE', task })
       })
     },
-    remove: (id: TaskType['id']) => {
+    remove: (id: Task['id']) => {
       del(id)
       dispatch({ type: 'REMOVE', id })
     },
@@ -134,48 +131,3 @@ const TaskTracker = () => {
   )
 }
 export default TaskTracker
-
-const TaskList = ({
-  taskContext,
-  taskContext: { tasks },
-}: {
-  taskContext: TaskContext
-}) => (
-  <div className='task-list'>
-    {tasks.map((task) => (
-      <Task {...{ key: task.id ?? Math.random(), task, taskContext }} />
-    ))}
-  </div>
-)
-
-const Task = ({
-  task,
-  task: { description, time, isSetReminder, id },
-  taskContext: { remove, update },
-}: {
-  task: TaskType
-  taskContext: TaskContext
-}) => {
-  return (
-    <div className='task'>
-      <p>{description}</p>
-      <p>{time}</p>
-      <Switch
-        defaultChecked={isSetReminder}
-        onChange={(e) => {
-          update({ ...task, isSetReminder: e.currentTarget.checked })
-        }}
-      >
-        <FaBell />
-      </Switch>
-      <p>{id}</p>
-      <IconButton
-        onClick={() => {
-          remove(id)
-        }}
-      >
-        <FaTrash />
-      </IconButton>
-    </div>
-  )
-}
