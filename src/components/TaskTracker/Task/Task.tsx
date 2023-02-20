@@ -14,9 +14,12 @@ const Task = ({
 }) => {
   return (
     <div className='task'>
-      <p>{description}</p>
-      <p>{time}</p>
+      <div className='task__display'>
+        <div className='task__description'>{description}</div>
+        <div className='task__time'>{time}</div>
+      </div>
       <Switch
+        className='task__switch'
         checked={isSetReminder}
         onChange={(e) => {
           update({ ...task, isSetReminder: e.target.checked })
@@ -24,8 +27,9 @@ const Task = ({
       >
         <FaBell />
       </Switch>
-      <p>{id}</p>
+      {/* <p>{id}</p> */}
       <IconButton
+        className='task__icon-button'
         onClick={() => {
           remove(id)
         }}

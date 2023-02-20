@@ -22,7 +22,9 @@ body,
 }
 
 body {
+  background-color: var(--greyLight-1);
   font-family: Poppins;
+  color: var(--greyDark);
 }
 .App {
   display: flex;
