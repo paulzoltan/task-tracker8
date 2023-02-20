@@ -2,8 +2,8 @@ import './taskTracker.css'
 import { useReducer } from 'react'
 import { QueryClient, useQuery, useMutation } from 'react-query'
 import axios from 'axios'
-import Button from '../../UI/Button'
 import TaskList from '../TaskList'
+import AddTask from '../AddTask'
 
 export const queryClient = new QueryClient()
 
@@ -19,11 +19,6 @@ export type TaskContext = {
   add: (task: Task) => void
   update: (task: Task) => void
   remove: (id: Task['id']) => void
-}
-const aTask = {
-  description: 'Prepare lunch',
-  time: 'Tomorow',
-  isSetReminder: false,
 }
 
 type ActionType =
@@ -118,14 +113,7 @@ const TaskTracker = () => {
 
   return (
     <div className='task-tracker'>
-      <Button
-        onClick={() => {
-          post(aTask)
-        }}
-      >
-        Add task
-      </Button>
-      {/* <pre>{JSON.stringify(tasks, null, 2)}</pre> */}
+      <AddTask {...{ taskContext }} />
       <TaskList {...{ taskContext }} />
     </div>
   )
