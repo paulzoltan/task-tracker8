@@ -1,0 +1,34 @@
+.add-task {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-items: stretch;
+  gap: 1em;
+}
+
+.add-task__button--toggle-form {
+  align-self: flex-end;
+}
+.add-task__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.add-task__input-group {
+  display: flex;
+  flex-direction: column;
+}
+.add-task__input-group label {
+  color: var(--greyLight-3);
+  font-size: 0.9em;
+}
+.add-task__label--checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.75em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}

@@ -24,23 +24,39 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
 
   return (
     <div className='add-task'>
-      <IconButton onClick={() => setIsFormPreset((fp) => !fp)}>
+      <IconButton
+        className='add-task__button--toggle-form'
+        onClick={() => setIsFormPreset((fp) => !fp)}
+      >
         <FaPlus />
       </IconButton>
       {isFormPresent ? (
-        <form onSubmit={handleSubmit} className='add-task-form'>
-          <TextInput name='description' defaultValue='Prepare lunch' />
-          <TextInput name='time' defaultValue='Tomorow' />
-          <label>
-            <Checkbox name='isSetReminder' defaultChecked={false} />
+        <form onSubmit={handleSubmit} className='add-task__form'>
+          <div className={'add-task__input-group'}>
+            <label htmlFor='description'>task</label>
+            <TextInput
+              className='add-task__text-input'
+              name='description'
+              defaultValue='Prepare lunch'
+            />
+          </div>
+          <div className='add-task__input-group'>
+            <label htmlFor='time'>time</label>
+            <TextInput
+              className='add-task__text-input'
+              name='time'
+              defaultValue='Tomorrow'
+            />
+          </div>
+          <label className='add-task__label--checkbox'>
+            <Checkbox
+              className='add-task__checkbox'
+              name='isSetReminder'
+              defaultChecked={false}
+            />
+            set reminder
           </label>
-          <Button
-            type='submit'
-            kind='primary'
-            // onClick={() => {
-            //   add(aTask)
-            // }}
-          >
+          <Button className={'add-task__submit'} type='submit' kind='primary'>
             Add task
           </Button>
         </form>
