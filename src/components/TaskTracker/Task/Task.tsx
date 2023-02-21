@@ -4,10 +4,44 @@ import Switch from '../../UI/Switch'
 import { FaTrash, FaBell } from 'react-icons/fa'
 import { TaskContext, Task as TaskType } from '../TaskTracker'
 import classNames from 'classnames'
+import { motion } from 'framer-motion'
 
+const visibility = {
+  visible: {
+    opacity: 1,
+    height: 'auto',
+    marginTop: '0.35em',
+    marginBottom: '0.35em',
+    transition: {
+      opacity: {
+        delay: 0.3,
+        duration: 0.1,
+      },
+    },
+  },
+  hidden: {
+    opacity: 0,
+    height: '0em',
+    marginTop: '0em',
+    marginBottom: '0em',
+    transition: {
+      opacity: { duration: 0.1 },
+      height: { delay: 0.1 },
+      marginTop: { delay: 0.1 },
+      marginBottom: { delay: 0.1 },
+    },
+  },
+}
+
+const taskMotionProps = {
+  initial: 'hidden',
+  animate: 'visible',
+  exit: 'hidden',
+  variants: visibility,
+}
 const Task = ({
   task,
-  task: { description, time, isSetReminder, id },
+  task: { description, time, isSetReminder, id, key },
   taskContext: { remove, update },
 }: {
   task: TaskType
@@ -15,12 +49,16 @@ const Task = ({
 }) => {
   const loading = id === undefined
   return (
-    <div className={classNames('task', { 'task--loading': loading })}>
+    <motion.div
+      {...taskMotionProps}
+      className={classNames('task', { 'task--loading': loading })}
+    >
       <div className='task__display'>
         <div className='task__description'>{description}</div>
         <div className='task__time'>{time}</div>
       </div>
-      <p>{id}</p>
+      {/* <p>{id}</p>
+      <p>{key}</p> */}
       <Switch
         className='task__switch'
         checked={isSetReminder}
@@ -40,7 +78,7 @@ const Task = ({
       >
         <FaTrash />
       </IconButton>
-    </div>
+    </motion.div>
   )
 }
 export default Task

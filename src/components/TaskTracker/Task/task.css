@@ -13,6 +13,7 @@
   margin-bottom: 0.35em;
   margin-left: 1.25em;
   margin-right: auto;
+  transition: var(--transition-time-1);
 }
 .task__switch {
   margin-top: 0.6em;

@@ -5,6 +5,8 @@ import axios from 'axios'
 import TaskList from '../TaskList'
 import AddTask from '../AddTask'
 import Indicator from './Indicator'
+import _ from 'lodash'
+import { createId } from '@paralleldrive/cuid2'
 
 export const queryClient = new QueryClient()
 
@@ -13,6 +15,7 @@ export interface Task {
   time: string
   isSetReminder: boolean
   id?: number | string
+  key?: number | string
 }
 
 export type TaskContext = {
@@ -24,7 +27,11 @@ export type TaskContext = {
 
 type ActionType =
   | {
-      type: 'SYNC'
+      type: 'OVERRIDE'
+      tasks: Task[]
+    }
+  | {
+      type: 'SYNCH'
       tasks: Task[]
     }
   | {
@@ -42,8 +49,16 @@ type ActionType =
 
 const reducer = (tasks: Task[], action: ActionType) => {
   switch (action.type) {
-    case 'SYNC':
+    case 'OVERRIDE':
       return action.tasks
+    case 'SYNCH':
+      if (_.isEmpty(tasks)) {
+        return action.tasks
+      }
+      return action.tasks.map((task: Task, index) => ({
+        ...task,
+        key: tasks[index]?.key,
+      }))
     case 'ADD':
       return [...tasks, action.task]
     case 'UPDATE':
@@ -72,7 +87,23 @@ const TaskTracker = () => {
     queryFn: () => axios('http://localhost:3003/tasks').then((res) => res.data),
     onSuccess: (data) => {
       if (!(isPostLoading || isPutLoading || isDelLoading)) {
-        dispatch({ type: 'SYNC', tasks: data })
+        if (
+          _.isEmpty(tasks) ||
+          // check if state and feched data are in synch (it should be)
+          (tasks.length === data.length &&
+            tasks.every(
+              (task, index) =>
+                task.description === data[index].description &&
+                task.time === data[index].time &&
+                task.isSetReminder === data[index].isSetReminder &&
+                (task.id === undefined || task.id === data[index].id)
+            ))
+        ) {
+          dispatch({ type: 'SYNCH', tasks: data })
+        } else {
+          dispatch({ type: 'OVERRIDE', tasks: data })
+          console.error('Client and server was out of synch', tasks, data)
+        }
       }
     },
   })
@@ -108,12 +139,12 @@ const TaskTracker = () => {
     add: (task: Task) => {
       setTimeout(() => {
         post(task)
-        dispatch({ type: 'ADD', task })
+        dispatch({ type: 'ADD', task: { ...task, key: createId() } })
       })
     },
     update: (task: Task) => {
       setTimeout(() => {
-        put(task)
+        put(_.omit(task, 'key'))
         dispatch({ type: 'UPDATE', task })
       })
     },
