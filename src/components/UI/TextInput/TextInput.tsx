@@ -1,5 +1,5 @@
 import './textInput.css'
-import classnames from 'classnames'
+import classNames from 'classnames'
 interface TextInputProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -10,7 +10,7 @@ const TextInput = ({ className, ...props }: TextInputProps) => {
     <input
       type='text'
       {...props}
-      className={classnames('text-input', className)}
+      className={classNames('text-input', className)}
     />
   )
 }

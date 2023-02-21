@@ -1,4 +1,4 @@
-import classnames from 'classnames'
+import classNames from 'classnames'
 import './button.css'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,7 +13,7 @@ const Button = ({
 }: ButtonProps) => {
   const kindClass = `button--${kind}`
   return (
-    <button {...props} className={classnames('button', kindClass, className)}>
+    <button {...props} className={classNames('button', kindClass, className)}>
       {children}
     </button>
   )

@@ -1,11 +1,11 @@
 import React from 'react'
 import './switch.css'
-import classnames from 'classnames'
+import classNames from 'classnames'
 
 interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 const Switch = ({ className, children, ...props }: SwitchProps) => {
   return (
-    <label className={classnames('switch', className)}>
+    <label className={classNames('switch', className)}>
       <input type='checkbox' {...props} />
       <div className='switch__knob'>{children}</div>
     </label>

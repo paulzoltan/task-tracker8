@@ -1,0 +1,17 @@
+.indicator {
+  font-size: 0.75em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.indicator__item {
+  margin: 0, 1em;
+  transition: var(--transition-time-1);
+}
+.indicator__item--highlighted {
+  color: white;
+  background-color: rgba(255, 33, 255, 0.54);
+}

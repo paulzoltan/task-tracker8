@@ -22,3 +22,6 @@
 .task__icon-button {
   margin: 0.5em 1.25em;
 }
+.task--loading {
+  color: var(--greyLight-2);
+}

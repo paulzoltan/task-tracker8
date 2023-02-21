@@ -1,6 +1,6 @@
 import './checkbox.css'
 import { FaCheck } from 'react-icons/fa'
-import classnames from 'classnames'
+import classNames from 'classnames'
 interface CheckboxProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -8,7 +8,7 @@ interface CheckboxProps
   > {}
 const Checkbox = ({ className, ...props }: CheckboxProps) => {
   return (
-    <label className={classnames(className, 'checkbox')}>
+    <label className={classNames(className, 'checkbox')}>
       <input type='checkbox' {...props} />
       <FaCheck className='checkbox__checkmark' />
     </label>

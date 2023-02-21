@@ -33,3 +33,6 @@ body {
   gap: 1em;
   margin: auto;
 }
+pre {
+  white-space: pre;
+}

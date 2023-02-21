@@ -4,6 +4,7 @@ import { QueryClient, useQuery, useMutation } from 'react-query'
 import axios from 'axios'
 import TaskList from '../TaskList'
 import AddTask from '../AddTask'
+import Indicator from './Indicator'
 
 export const queryClient = new QueryClient()
 
@@ -62,19 +63,25 @@ const TaskTracker = () => {
     queryClient.invalidateQueries({ queryKey: ['tasks'] })
   }
 
-  const { isLoading, error /* , data */ } = useQuery({
+  const {
+    isFetching: isQueryFetching,
+    isLoading: isQueryLoading,
+    error /* , data */,
+  } = useQuery({
     queryKey: 'tasks',
     queryFn: () => axios('http://localhost:3003/tasks').then((res) => res.data),
     onSuccess: (data) => {
-      dispatch({ type: 'SYNC', tasks: data })
+      if (!(isPostLoading || isPutLoading || isDelLoading)) {
+        dispatch({ type: 'SYNC', tasks: data })
+      }
     },
   })
-  const { mutate: post } = useMutation({
+  const { isLoading: isPostLoading, mutate: post } = useMutation({
     mutationFn: (task: Task) =>
       axios.post('http://localhost:3003/tasks', task).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
-  const { mutate: put } = useMutation({
+  const { isLoading: isPutLoading, mutate: put } = useMutation({
     mutationFn: (task: Task) =>
       axios
         .put(`http://localhost:3003/tasks/${task.id}`, task)
@@ -82,11 +89,19 @@ const TaskTracker = () => {
     onSuccess: invalidateTasks,
   })
 
-  const { mutate: del } = useMutation({
+  const { isLoading: isDelLoading, mutate: del } = useMutation({
     mutationFn: (id: Task['id']) =>
       axios.delete(`http://localhost:3003/tasks/${id}`).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
+
+  const loadingStates = {
+    isQueryFetching,
+    isQueryLoading,
+    isPostLoading,
+    isPutLoading,
+    isDelLoading,
+  }
 
   const taskContext = {
     tasks,
@@ -108,11 +123,12 @@ const TaskTracker = () => {
     },
   }
 
-  if (isLoading) return <p>Loading...</p>
+  if (isQueryLoading) return <p>Loading...</p>
   if (error) return <p>An error has occurred</p>
 
   return (
     <div className='task-tracker'>
+      <Indicator states={loadingStates} />
       <AddTask {...{ taskContext }} />
       <TaskList {...{ taskContext }} />
     </div>
