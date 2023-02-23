@@ -1,0 +1,85 @@
+<svg viewBox="0 0 1500 1670" opacity="0.4" width="428.6" height="477.2" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient-bg" x1="0" x2="1" y1="0" y2="0.8">
+      <stop offset="65%" stop-color="#e4ebf5" stop-opacity="1"/>
+      <stop offset="95%" stop-color="#243d4e" stop-opacity="0.4"/>
+    </linearGradient>
+    
+    <radialGradient  id="gradient-edge"  gradientUnits="userSpaceOnUse"
+                      cx="10" cy="10" r="250" fx="10" fy="10">
+      <stop offset="0%" stop-color="#dae3ed" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#dae3ed" stop-opacity="0" />
+    </radialGradient >
+    
+    <radialGradient  id="gradient-light"  gradientUnits="userSpaceOnUse"
+                      cx="50" cy="50" r="250" fx="50" fy="50">
+      <stop offset="0%" stop-color="#dae3ed" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ecf3fc" stop-opacity="1" />
+    </radialGradient >
+
+    <radialGradient  id="gradient-dark"  gradientUnits="userSpaceOnUse"
+                      cx="50" cy="50" r="250" fx="50" fy="50">
+      <stop offset="0%" stop-color="#bec7d5" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ecf3fc" stop-opacity="1" />
+    </radialGradient >
+      
+    <g id="hexagon">
+      <polygon points="300,130 225,260 75,260 0,130 75,0 225,0"></polygon>
+    </g>
+
+    <g id="unit-edge">
+      <use href="#hexagon" opacity="1" fill="url(#gradient-edge)"/>
+    </g>
+    <g id="unit-light">
+      <use href="#hexagon" transform="scale(1)"  opacity="1" fill="#ecf3fc"/>
+      <use href="#hexagon" transform="translate(4.5, 5 ), scale(0.95)"  opacity="1" fill="url(#gradient-light)"/>
+    </g>
+    <g id="unit-dark">
+      <use href="#hexagon" transform="scale(1)"  opacity="1" fill="#ecf3fc"/>
+      <use href="#hexagon" transform="translate(7.5, 6.5 ), scale(0.95)"  opacity="1" fill="url(#gradient-dark)"/>
+    </g>
+    <style>
+      <![CDATA[
+              #unit-dark, #unit-light { filter: drop-shadow(1px 1px 20px rgb(0 0 0 / 0.27))}
+              .drops-shadow { filter: drop-shadow(15px 15px 37px rgb(0 0 0 / 0.2)) drop-shadow(15px 15px 15px rgb(0 0 0 / 0.3));}
+            ]]>
+    </style>
+  </defs>
+  
+  <rect width="100%" height="100%" fill="url(#gradient-bg)" />
+
+  <use class="unit" href="#unit-dark" transform="translate(1200, 1410)"/>
+  <use class="unit" href="#unit-dark" transform="translate(966, 1276)"/>
+  <use class="unit drops-shadow" href="#unit-dark" transform="translate(966, 1544)"/>
+  <!-- <use class="unit drops-shadow" href="#unit-light" transform="translate(732, 1410)"/>   ignore! -->
+  <use class="unit" href="#unit-light" transform="translate(498, 1276)"/>
+  <use class="unit" href="#unit-dark" transform="translate(498, 1544)"/>
+  <use class="unit" href="#unit-light" transform="translate(264, 1410)"/>
+  
+  <use class="unit" href="#unit-light" transform="translate(30, 1544)"/>
+  <use class="unit" href="#unit-edge" transform="translate(30, 1276)"/>
+
+  <use class="unit" href="#unit-dark" transform="translate(1200, 1138)"/>
+  <use class="unit" href="#unit-light" transform="translate(732, 1138)"/>
+  <use class="unit" href="#unit-edge" transform="translate(264, 1138)"/>
+  <use class="unit" href="#unit-dark" transform="translate(966, 1002)"/>
+  
+  <use class="unit" href="#unit-edge" transform="translate(498, 1002)"/>
+  <use class="unit drops-shadow" href="#unit-dark" transform="translate(1200, 866)"/>
+  <use class="unit" href="#unit-light" transform="translate(732, 866)"/>
+  <use class="unit" href="#unit-light" transform="translate(966, 730)"/>
+  <use class="unit" href="#unit-edge" transform="translate(498, 730)"/>
+
+  <!-- <use class="unit drops-shadow" href="#unit-light" transform="translate(1200, 816)"/> ignore it! -->
+  <use class="unit" href="#unit-light" transform="translate(966, 458)" />
+  
+  <use class="unit" href="#unit-edge" transform="translate(732, 594)"/>
+  <use class="unit" href="#unit-light" transform="translate(1200, 322)"/>
+  <use class="unit" href="#unit-edge" transform="translate(732, 322)"/>
+  
+  <use class="unit" href="#unit-edge" transform="translate(966, 186)"/>
+  <use class="unit" href="#unit-light" transform="translate(1200, 50)"/>
+
+  <use class="unit drops-shadow" href="#unit-dark" transform="translate(732, 1410)"/>
+  <use class="unit drops-shadow" href="#unit-dark" transform="translate(1200, 594)"/>
+</svg>

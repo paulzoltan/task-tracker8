@@ -14,11 +14,10 @@
 
   --transition-time-1: 0.4s;
 }
-
 html,
 body,
 #root,
-.container {
+.app {
   height: 100%;
 }
 body {
@@ -26,11 +25,6 @@ body {
   font-family: Poppins;
   color: var(--greyDark);
 }
-
 pre {
   white-space: pre;
-}
-.container {
-  width: clamp(15em, 90vw, 25em);
-  margin: auto;
 }

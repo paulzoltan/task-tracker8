@@ -1,0 +1,37 @@
+.layout {
+  min-height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+.layout__bg-contanier {
+  flex-basis: 390px;
+  flex-shrink: 1000;
+  background-repeat: no-repeat;
+}
+.layout__bg-contanier--left {
+  background-position: right top;
+  background-image: url(../../assets/hexagons-left.svg);
+}
+.layout__bg-contanier--right {
+  background-position: left bottom;
+  background-image: url(../../assets/hexagons-right.svg);
+}
+.layout__crumple-zone {
+  flex-grow: 1;
+}
+.layout__container {
+  width: clamp(15em, 94vw, 25em);
+  display: flex;
+  flex-direction: column;
+}
+.layout__header {
+  background-color: rgb(182, 162, 255);
+  height: 4em;
+}
+.layout__footer {
+  margin-top: auto;
+  margin-bottom: 0;
+  background-color: rgb(182, 162, 255);
+  justify-self: flex-end;
+  height: 4em;
+}
