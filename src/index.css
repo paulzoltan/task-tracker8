@@ -18,21 +18,19 @@
 html,
 body,
 #root,
-.App {
+.container {
   height: 100%;
 }
-
 body {
   background-color: var(--greyLight-1);
   font-family: Poppins;
   color: var(--greyDark);
 }
-.App {
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-  margin: auto;
-}
+
 pre {
   white-space: pre;
+}
+.container {
+  width: clamp(15em, 90vw, 25em);
+  margin: auto;
 }

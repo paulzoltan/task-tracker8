@@ -15,6 +15,10 @@
   margin-right: auto;
   transition: var(--transition-time-1);
 }
+.task__description,
+.task__time {
+  font-size: 0.85em;
+}
 .task__switch {
   margin-top: 0.6em;
   margin-bottom: 0.6em;

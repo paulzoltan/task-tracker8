@@ -4,7 +4,7 @@ import { QueryClientProvider } from 'react-query'
 
 function App() {
   return (
-    <div className='App'>
+    <div className='container'>
       <QueryClientProvider client={queryClient}>
         <TaskTracker />
       </QueryClientProvider>
