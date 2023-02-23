@@ -78,13 +78,17 @@ const TaskTracker = () => {
     queryClient.invalidateQueries({ queryKey: ['tasks'] })
   }
 
+  const host = process.env.REACT_APP_INTERNAL_IP
+  const port = process.env.REACT_APP_SERVER_PORT
+  const endpoint = `http://${host}:${port}/`
+
   const {
     isFetching: isQueryFetching,
     isLoading: isQueryLoading,
     error /* , data */,
   } = useQuery({
     queryKey: 'tasks',
-    queryFn: () => axios('http://localhost:3003/tasks').then((res) => res.data),
+    queryFn: () => axios(`${endpoint}tasks`).then((res) => res.data),
     onSuccess: (data) => {
       if (!(isPostLoading || isPutLoading || isDelLoading)) {
         if (
@@ -109,20 +113,18 @@ const TaskTracker = () => {
   })
   const { isLoading: isPostLoading, mutate: post } = useMutation({
     mutationFn: (task: Task) =>
-      axios.post('http://localhost:3003/tasks', task).then((res) => res.data),
+      axios.post(`${endpoint}tasks`, task).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
   const { isLoading: isPutLoading, mutate: put } = useMutation({
     mutationFn: (task: Task) =>
-      axios
-        .put(`http://localhost:3003/tasks/${task.id}`, task)
-        .then((res) => res.data),
+      axios.put(`${endpoint}tasks/${task.id}`, task).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
 
   const { isLoading: isDelLoading, mutate: del } = useMutation({
     mutationFn: (id: Task['id']) =>
-      axios.delete(`http://localhost:3003/tasks/${id}`).then((res) => res.data),
+      axios.delete(`${endpoint}tasks/${id}`).then((res) => res.data),
     onSuccess: invalidateTasks,
   })
 
