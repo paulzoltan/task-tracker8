@@ -96,6 +96,7 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
                 className='add-task__text-input'
                 name='description'
                 defaultValue='Prepare lunch'
+                placeholder='what you have to do'
               />
             </div>
             <div className='add-task__input-group'>
@@ -104,6 +105,7 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
                 className='add-task__text-input'
                 name='time'
                 defaultValue='Tomorrow'
+                placeholder='when you have to it'
               />
             </div>
             <label className='add-task__label--checkbox'>
