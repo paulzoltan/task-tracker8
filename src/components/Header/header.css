@@ -1,0 +1,12 @@
+.layout__header {
+  display: flex;
+  align-items: center;
+  padding-top: min(10vw, 6vh);
+  padding-left: 0.35em;
+  font-family: Smooch Sans;
+  font-size: 1.7em;
+  color: var(--secondary);
+}
+.layout__header svg {
+  font-size: 1.2em;
+}
