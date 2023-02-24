@@ -1,0 +1,21 @@
+.layout__footer {
+  margin-top: auto;
+  margin-bottom: 0;
+  justify-self: flex-end;
+  padding: 2em;
+}
+
+.layout__footer ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav__item {
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--secondary);
+  font-family: 'Smooch Sans', sans-serif;
+  font-weight: 600;
+}

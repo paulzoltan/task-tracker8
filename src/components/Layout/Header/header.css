@@ -3,7 +3,7 @@
   align-items: center;
   padding-top: min(10vw, 6vh);
   padding-left: 0.35em;
-  font-family: Smooch Sans;
+  font-family: 'Smooch Sans', sans-serif;
   font-size: 1.7em;
   color: var(--secondary);
 }

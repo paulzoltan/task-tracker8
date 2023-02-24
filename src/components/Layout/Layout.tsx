@@ -1,5 +1,6 @@
 import './layout.css'
-import Header from '../Header'
+import Header from './Header'
+import Footer from './Footer'
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <div className='layout'>
@@ -11,7 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
       <Header />
       <div className='negative-space'></div>
       {children}
-      <div className='layout__footer'>footer</div>
+      <Footer />
     </div>
     <div className='layout__crumple-zone'></div>
     <div className='layout__bg-contanier--outer '>

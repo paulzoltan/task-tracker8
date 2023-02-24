@@ -36,11 +36,3 @@
   margin-top: -0.75em;
   margin-bottom: -0.75em;
 }
-
-.layout__footer {
-  margin-top: auto;
-  margin-bottom: 0;
-  background-color: rgb(182, 162, 255);
-  justify-self: flex-end;
-  height: 4em;
-}
