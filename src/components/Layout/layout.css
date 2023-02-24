@@ -3,31 +3,40 @@
   display: flex;
   align-items: stretch;
 }
-.layout__bg-contanier {
-  flex-basis: 390px;
-  flex-shrink: 1000;
-  background-repeat: no-repeat;
-}
-.layout__bg-contanier--left {
-  background-position: right top;
-  background-image: url(../../assets/hexagons-left.svg);
-}
-.layout__bg-contanier--right {
-  background-position: left bottom;
-  background-image: url(../../assets/hexagons-right.svg);
-}
 .layout__crumple-zone {
   flex-grow: 1;
+}
+.layout__bg-contanier--outer {
+  flex-basis: 390px;
+  flex-shrink: 1000;
+}
+.layout__bg-contanier--left--inner {
+  background-repeat: no-repeat;
+  height: 100%;
+  position: sticky;
+  top: 0;
+  background-position: top right;
+  background-image: url(../../assets/hexagons-left.svg);
+}
+.layout__bg-contanier--right--inner {
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 428.6px;
+  position: fixed;
+  bottom: 0;
+  background-position: left bottom;
+  background-image: url(../../assets/hexagons-right.svg);
 }
 .layout__container {
   width: clamp(15em, 94vw, 25em);
   display: flex;
   flex-direction: column;
 }
-.layout__header {
-  background-color: rgb(182, 162, 255);
-  height: 4em;
+.negative-space {
+  margin-top: -0.75em;
+  margin-bottom: -0.75em;
 }
+
 .layout__footer {
   margin-top: auto;
   margin-bottom: 0;
