@@ -1,8 +1,9 @@
 import './layout.css'
 import Header from './Header'
 import Footer from './Footer'
+import { Outlet } from 'react-router-dom'
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
+const Layout = () => (
   <div className='layout'>
     <div className='layout__bg-contanier--outer '>
       <div className='layout__bg-contanier--left--inner'></div>
@@ -10,8 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => (
     <div className='layout__crumple-zone'></div>
     <div className='layout__container'>
       <Header />
-      <div className='negative-space'></div>
-      {children}
+      <Outlet />
       <Footer />
     </div>
     <div className='layout__crumple-zone'></div>
