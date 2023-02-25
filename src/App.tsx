@@ -3,6 +3,7 @@ import TaskTracker, { queryClient } from './components/TaskTracker'
 import { QueryClientProvider } from 'react-query'
 import Layout from './components/Layout'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import About from './components/About'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
                 </QueryClientProvider>
               }
             />
-            <Route path='about' element={<div>Version: 1.0.0</div>} />
+            <Route path='about' element={<About />} />
           </Route>
         </Routes>
       </BrowserRouter>
