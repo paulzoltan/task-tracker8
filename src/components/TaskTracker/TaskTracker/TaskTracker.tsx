@@ -158,7 +158,7 @@ const TaskTracker = () => {
     },
   }
   const isFirstRender = useFirstRender()
-  if (error) return <p>An error has occurred</p>
+  if (error) return <div className='error-message'>An error has occurred</div>
 
   return (
     <div className='task-tracker'>
