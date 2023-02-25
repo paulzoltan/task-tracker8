@@ -6,8 +6,13 @@
   align-items: flex-end;
   align-items: stretch;
 }
-.add-task__button--toggle-form-container {
+.add-task__button--toggle-form {
   align-self: flex-end;
+}
+.add-task__button__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .add-task__form {
   display: flex;

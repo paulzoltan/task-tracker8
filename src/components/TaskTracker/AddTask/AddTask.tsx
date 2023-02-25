@@ -72,17 +72,17 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
 
   return (
     <div className='add-task'>
-      <motion.div
-        className='add-task__button--toggle-form-container'
-        {...addButtonMotionProps}
+      <IconButton
+        className='add-task__button--toggle-form'
+        onClick={() => setIsFormPreset((fp) => !fp)}
       >
-        <IconButton
-          className='add-task__button--toggle-form'
-          onClick={() => setIsFormPreset((fp) => !fp)}
+        <motion.div
+          {...addButtonMotionProps}
+          className='add-task__button__icon-container'
         >
           <FaPlus />
-        </IconButton>
-      </motion.div>
+        </motion.div>
+      </IconButton>
       <AnimatePresence>
         {isFormPresent && (
           <motion.form
