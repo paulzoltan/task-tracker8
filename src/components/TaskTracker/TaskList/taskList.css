@@ -3,3 +3,7 @@
   flex-direction: column-reverse;
   justify-content: center;
 }
+.no-task-message {
+  text-align: center;
+  padding: 1em;
+}

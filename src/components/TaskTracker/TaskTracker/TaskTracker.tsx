@@ -7,6 +7,8 @@ import AddTask from '../AddTask'
 import Indicator from './Indicator'
 import _ from 'lodash'
 import { createId } from '@paralleldrive/cuid2'
+import SkeletonLoader from '../SkeletonLoader'
+import useFirstRender from '../../../hooks/useFirstRender'
 
 export const queryClient = new QueryClient()
 
@@ -155,15 +157,18 @@ const TaskTracker = () => {
       dispatch({ type: 'REMOVE', id })
     },
   }
-
-  if (isQueryLoading) return <p>Loading...</p>
+  const isFirstRender = useFirstRender()
   if (error) return <p>An error has occurred</p>
 
   return (
     <div className='task-tracker'>
       <Indicator states={loadingStates} />
       <AddTask {...{ taskContext }} />
-      <TaskList {...{ taskContext }} />
+      {isQueryLoading || isFirstRender ? (
+        <SkeletonLoader />
+      ) : (
+        <TaskList {...{ taskContext }} />
+      )}
     </div>
   )
 }

@@ -2,6 +2,7 @@ import './taskList.css'
 import { TaskContext } from '../TaskTracker'
 import Task from '../Task'
 import { AnimatePresence } from 'framer-motion'
+import _ from 'lodash'
 const TaskList = ({
   taskContext,
   taskContext: { tasks },
@@ -9,7 +10,10 @@ const TaskList = ({
   taskContext: TaskContext
 }) => (
   <div className='task-list'>
-    <AnimatePresence>
+    {_.isEmpty(tasks) && (
+      <div className='no-task-message'>There are no tasks.</div>
+    )}
+    <AnimatePresence initial={false}>
       {tasks.map((task) => (
         <Task {...{ key: task.key ?? task.id, task, taskContext }} />
       ))}
