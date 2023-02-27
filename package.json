@@ -2,6 +2,7 @@
   "name": "task-tracker8",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/build",
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.0",
     "@testing-library/jest-dom": "^5.16.5",

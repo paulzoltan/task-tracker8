@@ -4,7 +4,7 @@ import { QueryClient, useQuery, useMutation } from 'react-query'
 import axios from 'axios'
 import TaskList from '../TaskList'
 import AddTask from '../AddTask'
-import Indicator from './Indicator'
+// import Indicator from './Indicator'
 import _ from 'lodash'
 import { createId } from '@paralleldrive/cuid2'
 import SkeletonLoader from '../SkeletonLoader'
@@ -162,7 +162,7 @@ const TaskTracker = () => {
 
   return (
     <div className='task-tracker'>
-      <Indicator states={loadingStates} />
+      {/* <Indicator states={loadingStates} /> */}
       <AddTask {...{ taskContext }} />
       {isQueryLoading || isFirstRender ? (
         <SkeletonLoader />
