@@ -3,6 +3,12 @@
   flex-direction: column-reverse;
   justify-content: center;
 }
+.task:nth-child(2n + 1) {
+  translate: -1em;
+}
+.task:nth-child(2n) {
+  translate: 1em;
+}
 .no-task-message {
   text-align: center;
   padding: 1em;

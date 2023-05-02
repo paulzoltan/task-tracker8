@@ -28,13 +28,20 @@
   font-size: 0.9em;
 }
 .add-task__label--checkbox {
-  display: flex;
   align-items: center;
   justify-content: left;
   align-self: flex-start;
   gap: 0.75em;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
+  margin-left: 1em;
   cursor: default;
   transition: var(--transition-time-1);
+}
+.add-task__submit {
+  margin-top: 0.5em;
+  margin-bottom: 2em;
+  display: inline;
+  align-self: center;
+  width: 60%;
 }
