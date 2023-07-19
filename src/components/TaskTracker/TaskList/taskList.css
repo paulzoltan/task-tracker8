@@ -3,11 +3,22 @@
   flex-direction: column-reverse;
   justify-content: center;
 }
+.task {
+  transition-duration: 0.3s;
+  transition-property: margin-left, margin-right;
+}
 .task:nth-child(2n + 1) {
-  translate: -1em;
+  transition-duration: 0.2s;
+  transition-property: margin-left, margin-right;
 }
 .task:nth-child(2n) {
-  translate: 1em;
+  transition-duration: 0.4s;
+  transition-property: margin-left, margin-right;
+}
+@media (min-width: 600px) {
+  .task:nth-child(2n + 1) {
+    margin: 1em;
+  }
 }
 .no-task-message {
   text-align: center;

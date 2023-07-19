@@ -11,6 +11,7 @@
     -2px -2px 1px 1px #fff9;
   cursor: pointer;
   transition: var(--transition-time-1);
+  background-color: var(--greyLight-1);
 }
 .icon-button > * {
   font-size: 0.75em;
