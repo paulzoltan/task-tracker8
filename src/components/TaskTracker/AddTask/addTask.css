@@ -28,6 +28,7 @@
   font-size: 0.9em;
 }
 .add-task__label--checkbox {
+  display: flex;
   align-items: center;
   justify-content: left;
   align-self: flex-start;
