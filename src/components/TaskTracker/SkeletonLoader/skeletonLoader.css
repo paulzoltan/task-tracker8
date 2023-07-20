@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
 }
+
+@media (min-width: 600px) {
+  .skeleton-loader__item:nth-child(2n + 1) {
+    margin: 1em;
+  }
+}
 .skeleton-loader__item {
   border-radius: 0.35em;
   background: linear-gradient(155deg, #0002 0%, #0001 100%);
