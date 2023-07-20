@@ -1,7 +1,8 @@
 {
   "name": "task-tracker8",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://paulzoltan.github.io/task-tracker8",
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -35,7 +36,9 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "restore-db": "cp db-backup.json db.json",
-    "update-internal-ip": "get-local-ip-cli | npx dotenv-cli-update REACT_APP_INTERNAL_IP"
+    "update-internal-ip": "get-local-ip-cli | npx dotenv-cli-update REACT_APP_INTERNAL_IP",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -77,6 +80,7 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "react-router-dom": "^6.8.1",
     "webpack": "^5.75.0"
