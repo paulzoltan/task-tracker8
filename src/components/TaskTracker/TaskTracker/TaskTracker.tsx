@@ -82,7 +82,8 @@ const TaskTracker = () => {
 
   const host = process.env.REACT_APP_INTERNAL_IP
   const port = process.env.REACT_APP_SERVER_PORT
-  const endpoint = `http://${host}:${port}/`
+  // const endpoint = `http://${host}:${port}/`
+  const endpoint = `https://csaknem.hu/task-tracker-api/web/`
 
   const {
     isFetching: isQueryFetching,
