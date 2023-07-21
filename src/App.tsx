@@ -8,7 +8,11 @@ import About from './components/About'
 function App() {
   return (
     <div className='app'>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter
+        basename={
+          process.env.NODE_ENV !== 'development' ? process.env.PUBLIC_URL : ''
+        }
+      >
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route
