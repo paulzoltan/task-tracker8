@@ -1,7 +1,5 @@
 import './taskTracker.css'
 import { useReducer } from 'react'
-import { QueryClient, useQuery, useMutation } from 'react-query'
-import axios from 'axios'
 import TaskList from '../TaskList'
 import AddTask from '../AddTask'
 // import Indicator from './Indicator'
@@ -9,8 +7,7 @@ import _ from 'lodash'
 import { createId } from '@paralleldrive/cuid2'
 import SkeletonLoader from '../SkeletonLoader'
 import useFirstRender from '../../../hooks/useFirstRender'
-
-export const queryClient = new QueryClient()
+import { useTaskData } from './useTaskData'
 
 export interface Task {
   description: string
@@ -76,70 +73,45 @@ const reducer = (tasks: Task[], action: ActionType) => {
 const TaskTracker = () => {
   const [tasks, dispatch] = useReducer(reducer, [])
 
-  const invalidateTasks = () => {
-    queryClient.invalidateQueries({ queryKey: ['tasks'] })
+  const onEveryFetchFinished = (data: Task[]) => {
+    if (
+      _.isEmpty(tasks) ||
+      // check if state and fetched data are in synch (it should be)
+      (tasks.length === data.length &&
+        tasks.every(
+          (task, index) =>
+            task.description === data[index].description &&
+            task.time === data[index].time &&
+            task.isSetReminder === data[index].isSetReminder &&
+            (task.id === undefined || task.id === data[index].id)
+        ))
+    ) {
+      dispatch({ type: 'SYNCH', tasks: data })
+    } else {
+      dispatch({ type: 'OVERRIDE', tasks: data })
+      console.error('Client and server was out of synch', tasks, data)
+    }
   }
-
-  const host = process.env.REACT_APP_INTERNAL_IP
-  const port = process.env.REACT_APP_SERVER_PORT
-  const endpoint =
-    process.env.NODE_ENV === 'development'
-      ? `http://${host}:${port}/`
-      : `https://csaknem.hu/task-tracker-api/web/`
 
   const {
-    isFetching: isQueryFetching,
-    isLoading: isQueryLoading,
-    error /* , data */,
-  } = useQuery({
-    queryKey: 'tasks',
-    queryFn: () => axios(`${endpoint}tasks`).then((res) => res.data),
-    onSuccess: (data) => {
-      if (!(isPostLoading || isPutLoading || isDelLoading)) {
-        if (
-          _.isEmpty(tasks) ||
-          // check if state and feched data are in synch (it should be)
-          (tasks.length === data.length &&
-            tasks.every(
-              (task, index) =>
-                task.description === data[index].description &&
-                task.time === data[index].time &&
-                task.isSetReminder === data[index].isSetReminder &&
-                (task.id === undefined || task.id === data[index].id)
-            ))
-        ) {
-          dispatch({ type: 'SYNCH', tasks: data })
-        } else {
-          dispatch({ type: 'OVERRIDE', tasks: data })
-          console.error('Client and server was out of synch', tasks, data)
-        }
-      }
-    },
-  })
-  const { isLoading: isPostLoading, mutate: post } = useMutation({
-    mutationFn: (task: Task) =>
-      axios.post(`${endpoint}tasks`, task).then((res) => res.data),
-    onSuccess: invalidateTasks,
-  })
-  const { isLoading: isPutLoading, mutate: put } = useMutation({
-    mutationFn: (task: Task) =>
-      axios.put(`${endpoint}tasks/${task.id}`, task).then((res) => res.data),
-    onSuccess: invalidateTasks,
-  })
-
-  const { isLoading: isDelLoading, mutate: del } = useMutation({
-    mutationFn: (id: Task['id']) =>
-      axios.delete(`${endpoint}tasks/${id}`).then((res) => res.data),
-    onSuccess: invalidateTasks,
-  })
-
-  const loadingStates = {
-    isQueryFetching,
+    // isQueryFetching,
     isQueryLoading,
-    isPostLoading,
-    isPutLoading,
-    isDelLoading,
-  }
+    // isPostLoading,
+    // isPutLoading,
+    // isDelLoading,
+    error,
+    post,
+    put,
+    del,
+  } = useTaskData({ onEveryFetchFinished })
+
+  // const loadingStates = {
+  //   isQueryFetching,
+  //   isQueryLoading,
+  //   isPostLoading,
+  //   isPutLoading,
+  //   isDelLoading,
+  // }
 
   const taskContext = {
     tasks,
