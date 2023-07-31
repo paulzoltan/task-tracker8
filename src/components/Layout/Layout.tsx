@@ -12,9 +12,10 @@ const motionProps = {
 
 const Layout = () => (
   <div className='layout'>
-    <motion.div {...motionProps} className='layout__bg-contanier--outer'>
-      <div className='layout__bg-contanier--left--inner'></div>
-    </motion.div>
+    <motion.div
+      {...motionProps}
+      className='layout__bg-contanier layout__bg-contanier--left'
+    ></motion.div>
     <div className='layout__crumple-zone'></div>
     <div className='layout__container'>
       <Header />
@@ -22,9 +23,10 @@ const Layout = () => (
       <Footer />
     </div>
     <div className='layout__crumple-zone'></div>
-    <motion.div {...motionProps} className='layout__bg-contanier--outer '>
-      <div className='layout__bg-contanier--right--inner'></div>
-    </motion.div>
+    <motion.div
+      {...motionProps}
+      className='layout__bg-contanier  layout__bg-contanier--right'
+    ></motion.div>
   </div>
 )
 export default Layout

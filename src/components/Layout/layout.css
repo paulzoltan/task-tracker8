@@ -1,34 +1,25 @@
 .layout {
   min-height: 100%;
   display: flex;
-  align-items: stretch;
 }
 .layout__crumple-zone {
   flex-grow: 1;
 }
-.layout__bg-contanier--outer {
+.layout__bg-contanier {
   flex-basis: 390px;
-  flex-shrink: 1000;
-}
-.layout__bg-contanier--left--inner {
   background-repeat: no-repeat;
-  height: 100%;
-  position: sticky;
-  top: 0;
-  background-position: top right;
+}
+.layout__bg-contanier--left {
   background-image: url(../../assets/hexagons-left.svg);
+  background-position: right top;
 }
-.layout__bg-contanier--right--inner {
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 428.6px;
-  position: fixed;
-  bottom: 0;
-  background-position: left bottom;
+.layout__bg-contanier--right {
   background-image: url(../../assets/hexagons-right.svg);
+  background-position: left bottom;
 }
 .layout__container {
   width: clamp(15em, 94vw, 25em);
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
