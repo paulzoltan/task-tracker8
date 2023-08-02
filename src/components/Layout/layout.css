@@ -5,21 +5,29 @@
 .layout__crumple-zone {
   flex-grow: 1;
 }
-.layout__bg-contanier {
-  flex-basis: 390px;
-  background-repeat: no-repeat;
-}
-.layout__bg-contanier--left {
-  background-image: url(../../assets/hexagons-left.svg);
-  background-position: right top;
-}
-.layout__bg-contanier--right {
-  background-image: url(../../assets/hexagons-right.svg);
-  background-position: left bottom;
-}
 .layout__container {
   width: clamp(15em, 94vw, 25em);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+}
+.layout__bg-contanier--outer {
+  flex-basis: 390px;
+  position: relative;
+}
+.layout__bg-contanier--inner {
+  position: sticky;
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+.layout__bg-contanier--inner--left {
+  background-image: url(../../assets/hexagons-left.svg);
+  background-position: right top;
+  top: 0;
+}
+.layout__bg-contanier--inner--right {
+  background-image: url(../../assets/hexagons-right.svg);
+  background-position: left bottom;
+  top: 0;
 }
