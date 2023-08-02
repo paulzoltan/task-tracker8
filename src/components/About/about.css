@@ -8,10 +8,11 @@
   font-size: 1.3em;
   color: var(--secondary);
 }
-.about p {
+.about h3 {
   margin-bottom: 1em;
+  font-size: 0.7em;
 }
-.about b {
-  font-weight: bold;
-  font-size: 1.2em;
+
+.about a {
+  filter: brightness(0.5);
 }
