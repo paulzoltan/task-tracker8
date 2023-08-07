@@ -1,8 +1,13 @@
+import { motion } from 'framer-motion'
 import './about.css'
 
 const About = () => {
   return (
-    <div className='about'>
+    <motion.div
+      className='about'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <h3>A Totally not Cliche Task Tracker</h3>
       <p>
         Created by <a href='mailto:paulzoltan02@gmail.com'>Zoltán Paul</a>
@@ -13,7 +18,7 @@ const About = () => {
           here
         </a>
       </p>
-    </div>
+    </motion.div>
   )
 }
 export default About
