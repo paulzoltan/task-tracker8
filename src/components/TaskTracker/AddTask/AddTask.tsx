@@ -8,19 +8,46 @@ import { TaskContext } from '../TaskTracker'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+const PREFILLED_FIELDS = true
+
 const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
   const [isFormPresent, setIsFormPreset] = useState(false)
+  const [descriptionValid, setDescriptionValid] = useState(true)
+  const [dynamicValidationOn, setDynamicValidationOn] = useState(false)
+
+  const descriptionDynamicValidation = (value: string) => {
+    // If dynamicValidation is disabled, we consider everything to be valid.
+    if (!dynamicValidationOn) {
+      setDescriptionValid(true)
+      return
+    }
+    // The description field is considered valid if it is not empty.
+    if (value) {
+      setDescriptionValid(true)
+    } else {
+      setDescriptionValid(false)
+    }
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    const imput = (name: string) =>
+    const input = (name: string) =>
       e.currentTarget.elements.namedItem(name) as HTMLInputElement
 
-    const description = imput('description').value
-    const time = imput('time').value
-    const isSetReminder = imput('isSetReminder').checked
-    add({ description, time, isSetReminder })
+    const description = input('description').value
+    const time = input('time').value
+    const isSetReminder = input('isSetReminder').checked
+
+    // The form is considered valid if the description is not empty.
+    if (description) {
+      setDynamicValidationOn(false)
+      add({ description, time, isSetReminder })
+    } else {
+      setDescriptionValid(false)
+      // If a submission is invalid, the dynamic validation mode is activated.
+      setDynamicValidationOn(true)
+    }
   }
 
   const rotation = {
@@ -95,16 +122,23 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
               <TextInput
                 className='add-task__text-input'
                 name='description'
-                defaultValue='Prepare lunch'
+                defaultValue={PREFILLED_FIELDS ? 'Prepare lunch' : ''}
                 placeholder='what you have to do'
+                invalid={!descriptionValid}
+                onInput={(e) =>
+                  descriptionDynamicValidation(e.currentTarget.value)
+                }
               />
+              <div className='validation-error-message'>
+                {!descriptionValid && <>this field cannot be empty</>}
+              </div>
             </div>
             <div className='add-task__input-group'>
               <label htmlFor='time'>time</label>
               <TextInput
                 className='add-task__text-input'
                 name='time'
-                defaultValue='Tomorrow'
+                defaultValue={PREFILLED_FIELDS ? 'Tomorrow' : ''}
                 placeholder='when you have to it'
               />
             </div>

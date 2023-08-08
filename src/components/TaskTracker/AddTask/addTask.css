@@ -17,7 +17,6 @@
 .add-task__form {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
 }
 .add-task__input-group {
   display: flex;
@@ -26,6 +25,8 @@
 .add-task__input-group label {
   color: var(--greyLight-3);
   font-size: 0.9em;
+  margin-left: 0.3em;
+  margin-bottom: 0.3em;
 }
 .add-task__label--checkbox {
   display: flex;
@@ -45,4 +46,12 @@
   display: inline;
   align-self: center;
   width: 60%;
+}
+.validation-error-message {
+  color: #ce126a68;
+  min-height: 1.25em;
+  line-height: 1.25;
+  margin-left: 0.3em;
+  margin-top: 0.3em;
+  font-size: 0.8em;
 }

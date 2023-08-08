@@ -4,14 +4,25 @@ interface TextInputProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  > {}
-const TextInput = ({ className, ...props }: TextInputProps) => {
+  > {
+  invalid?: boolean
+}
+const TextInput = ({
+  className,
+  invalid = false,
+  ...props
+}: TextInputProps) => {
   return (
-    <input
-      type='text'
-      {...props}
-      className={classNames('text-input', className)}
-    />
+    <>
+      <input
+        type='text'
+        {...props}
+        className={classNames('text-input', className, {
+          'text-input-invalid': invalid,
+        })}
+      />
+      <span>{invalid}</span>
+    </>
   )
 }
 export default TextInput
