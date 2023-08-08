@@ -1,11 +1,12 @@
 import './header.css'
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <div className='layout__header'>
+    <NavLink to='/' className='layout__header'>
       <span>Task</span> <IoMdCheckmarkCircleOutline /> <span>Tracker</span>
-    </div>
+    </NavLink>
   )
 }
 export default Header
