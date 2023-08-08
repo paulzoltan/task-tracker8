@@ -7,27 +7,15 @@ import './addTask.css'
 import { TaskContext } from '../TaskTracker'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import useValidation from '../../../hooks/useValidation'
 
 const PREFILLED_FIELDS = true
 
 const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
   const [isFormPresent, setIsFormPreset] = useState(false)
-  const [descriptionValid, setDescriptionValid] = useState(true)
-  const [dynamicValidationOn, setDynamicValidationOn] = useState(false)
-
-  const descriptionDynamicValidation = (value: string) => {
-    // If dynamicValidation is disabled, we consider everything to be valid.
-    if (!dynamicValidationOn) {
-      setDescriptionValid(true)
-      return
-    }
-    // The description field is considered valid if it is not empty.
-    if (value) {
-      setDescriptionValid(true)
-    } else {
-      setDescriptionValid(false)
-    }
-  }
+  //  Using the following hook allows to show validation errors only after an
+  //  initial invalid form submission
+  const { valid, enableDynamicValidation, dynamicValidation } = useValidation()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -39,15 +27,10 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
     const time = input('time').value
     const isSetReminder = input('isSetReminder').checked
 
-    // The form is considered valid if the description is not empty.
     if (description) {
-      setDynamicValidationOn(false)
       add({ description, time, isSetReminder })
-    } else {
-      setDescriptionValid(false)
-      // If a submission is invalid, the dynamic validation mode is activated.
-      setDynamicValidationOn(true)
     }
+    enableDynamicValidation(description === '')
   }
 
   const rotation = {
@@ -101,7 +84,10 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
     <div className='add-task'>
       <IconButton
         className='add-task__button--toggle-form'
-        onClick={() => setIsFormPreset((fp) => !fp)}
+        onClick={() => {
+          setIsFormPreset((fp) => !fp)
+          enableDynamicValidation(false)
+        }}
       >
         <motion.div
           {...addButtonMotionProps}
@@ -124,13 +110,11 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
                 name='description'
                 defaultValue={PREFILLED_FIELDS ? 'Prepare lunch' : ''}
                 placeholder='what you have to do'
-                invalid={!descriptionValid}
-                onInput={(e) =>
-                  descriptionDynamicValidation(e.currentTarget.value)
-                }
+                invalid={!valid}
+                onInput={(e) => dynamicValidation(e.currentTarget.value !== '')}
               />
               <div className='validation-error-message'>
-                {!descriptionValid && <>this field cannot be empty</>}
+                {!valid && <>this field cannot be empty</>}
               </div>
             </div>
             <div className='add-task__input-group'>
