@@ -27,8 +27,11 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
     const time = input('time').value
     const isSetReminder = input('isSetReminder').checked
 
-    if (description) {
+    if (description !== '') {
       add({ description, time, isSetReminder })
+      input('description').value = ''
+      input('time').value = ''
+      input('isSetReminder').checked = false
     }
     enableDynamicValidation(description === '')
   }
