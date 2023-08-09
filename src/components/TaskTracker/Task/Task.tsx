@@ -5,6 +5,7 @@ import { FaTrash, FaBell } from 'react-icons/fa'
 import { TaskContext, Task as TaskType } from '../TaskTracker'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const visibility = {
   visible: {
@@ -47,6 +48,7 @@ const Task = ({
   task: TaskType
   taskContext: TaskContext
 }) => {
+  const [removeButtonDisabled, setRemoveButtonDisabled] = useState(false)
   const loading = id === undefined
   return (
     <motion.div
@@ -71,8 +73,9 @@ const Task = ({
       </Switch>
       <IconButton
         className='task__icon-button'
-        disabled={loading}
-        onClick={() => {
+        disabled={loading || removeButtonDisabled}
+        onClick={(e) => {
+          setRemoveButtonDisabled(true)
           remove(id)
         }}
       >

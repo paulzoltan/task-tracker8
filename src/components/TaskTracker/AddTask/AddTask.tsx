@@ -9,7 +9,8 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import useValidation from '../../../hooks/useValidation'
 
-const PREFILLED_FIELDS = true
+const PREFILLED_FIELDS = false
+const RESET_FORM_ON_SUBMISSION = true
 
 const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
   const [isFormPresent, setIsFormPreset] = useState(false)
@@ -29,9 +30,11 @@ const AddTask = ({ taskContext: { add } }: { taskContext: TaskContext }) => {
 
     if (description !== '') {
       add({ description, time, isSetReminder })
-      input('description').value = ''
-      input('time').value = ''
-      input('isSetReminder').checked = false
+      if (RESET_FORM_ON_SUBMISSION) {
+        input('description').value = ''
+        input('time').value = ''
+        input('isSetReminder').checked = false
+      }
     }
     enableDynamicValidation(description === '')
   }
