@@ -1,7 +1,7 @@
 import './taskList.css'
 import { TaskContext } from '../TaskTracker'
 import Task from '../Task'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import _ from 'lodash'
 const TaskList = ({
   taskContext,
@@ -9,7 +9,13 @@ const TaskList = ({
 }: {
   taskContext: TaskContext
 }) => (
-  <div className='task-list'>
+  <motion.div
+    className='task-list'
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.15 }}
+  >
     {_.isEmpty(tasks) && (
       <div className='no-task-message'>There are no tasks.</div>
     )}
@@ -18,6 +24,6 @@ const TaskList = ({
         <Task {...{ key: task.key ?? task.id, task, taskContext }} />
       ))}
     </AnimatePresence>
-  </div>
+  </motion.div>
 )
 export default TaskList

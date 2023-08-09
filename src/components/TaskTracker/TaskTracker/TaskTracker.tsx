@@ -8,7 +8,7 @@ import { createId } from '@paralleldrive/cuid2'
 import SkeletonLoader from '../SkeletonLoader'
 import useFirstRender from '../../../hooks/useFirstRender'
 import { useTaskData } from './useTaskData'
-import { motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 
 export interface Task {
   description: string
@@ -137,19 +137,17 @@ const TaskTracker = () => {
   if (error) return <div className='error-message'>An error has occurred</div>
 
   return (
-    <motion.div
-      className='task-tracker'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
+    <div className='task-tracker'>
       {/* <Indicator states={loadingStates} /> */}
       <AddTask {...{ taskContext }} />
-      {isQueryLoading || isFirstRender ? (
-        <SkeletonLoader />
-      ) : (
-        <TaskList {...{ taskContext }} />
-      )}
-    </motion.div>
+      <AnimatePresence mode='wait'>
+        {isQueryLoading || isFirstRender ? (
+          <SkeletonLoader key='SkeletonLoader' />
+        ) : (
+          <TaskList {...{ taskContext }} key='TaskList' />
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 export default TaskTracker
